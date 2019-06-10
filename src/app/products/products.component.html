@@ -1,0 +1,47 @@
+<div class="col-lg-12 grid-margin stretch-card">
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6">
+          <h4 class="card-title">Productos</h4>
+        </div>
+        <div class="col-md-6">
+          <button type="button" class="btn btn-link btn-fw" style="float: right;" (click)="newProduct()">Crear</button>
+        </div>
+      </div>
+      <p class="card-description">
+        Aquí puedes ver todos los productos que tienes disponibles en el inventario
+      </p>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Inventario</th>
+            <th>Precio</th>
+            <th>Proveedor</th>
+            <th>Categoría</th>
+            <th>Sub-categoría</th>
+            <th>Acciones</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let product of products">
+            <td>{{ product.name }}</td>
+            <td>{{ product.qty }}</td>
+            <td>{{ product.price |currency }}</td>
+            <td>{{ product.provider.name }}</td>
+            <td>{{ product.category.name }}</td>
+            <td>{{ product.subCategory.name }}</td>
+            <td>
+              <a routerLink="/products/{{ product.id }}">
+                <i class="fa fa-edit"></i>
+              </a>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

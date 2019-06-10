@@ -1,0 +1,52 @@
+<div class="col-lg-12 grid-margin stretch-card">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">{{ provider.name }}</h4>
+      <form #updateProviderForm="ngForm" (submit)="updateProvider()">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="form-group">
+              <label for="name">Nombre</label>
+              <input type="text" class="form-control" name="name" id="name" [(ngModel)]="provider.name">
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="text" class="form-control" name="email" id="email" [(ngModel)]="provider.email">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="form-group">
+              <label for="phoneNumber">Número de teléfono</label>
+              <input type="text" class="form-control" name="phoneNumber" id="phoneNumber" [(ngModel)]="provider.phoneNumber">
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="form-group">
+              <label for="active">Activo</label>
+              <input name="active" type="checkbox" id="active" class="form-control" [(ngModel)]="provider.status">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="form-group">
+              <label for="uniqueId">Idenfificador interno</label>
+              <input type="text" class="form-control" name="uniqueId" id="uniqueId" [(ngModel)]="provider.uniqueId">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <button class="btn btn-secondary btn-fw" *ngIf="'new' !== providerId">Guardar</button>
+            <button class="btn btn-secondary btn-fw" *ngIf="'new' === providerId">Crear</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<swal #notificationSwal title="Proveedor" text=""></swal>

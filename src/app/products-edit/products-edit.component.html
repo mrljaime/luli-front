@@ -1,0 +1,84 @@
+<div class="col-lg-12 grid-margin stretch-card">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">{{ product.name }}</h4>
+      <form #updateProductForm="ngForm" (submit)="updateProduct()">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="form-group">
+              <label for="name">Nombre</label>
+              <input name="name" type="text" id="name" class="form-control" [(ngModel)]="product.name">
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="form-group">
+              <label for="description">Descripción</label>
+              <input name="description" type="text" id="description" class="form-control" [(ngModel)]="product.description">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="form-group">
+              <label for="invetory">En inventario</label>
+              <input name="invetory" type="number" min="0" id="invetory" class="form-control" [(ngModel)]="product.qty">
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="form-group">
+              <label for="price">Precio</label>
+              <input name="price" type="text" id="price" class="form-control" [(ngModel)]="product.price">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="form-group">
+              <label for="provider">Proveedor</label>
+              <select name="provider" id="provider" class="form-control" [disabled]="'new' !== productId"
+                [(ngModel)]="iProvider" [ngModelOptions]="{standalone: true}" (change)="setProvider()">
+                <option [ngValue]="provider.id" [selected]="provider.id == iProvider"
+                        *ngFor="let provider of providers">{{ provider.name }}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="form-group">
+              <label for="active">Activo</label>
+              <input name="active" type="checkbox" id="active" class="form-control" [(ngModel)]="product.active">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="form-group">
+              <label for="category">Categoría</label>
+              <select name="category" id="category" class="form-control" [(ngModel)]="iCategory"
+                [ngModelOptions]="{standalone: true}" (change)="setCategory()">
+                <option *ngFor="let category of categories" [ngValue]="category.id"
+                  [selected]="category.id == iCategory">{{ category.name }}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="form-group">
+              <label for="subCategory">Categoría</label>
+              <select name="subCategory" id="subCategory" class="form-control" [(ngModel)]="iSubcategory"
+                [ngModelOptions]="{standalone: true}" (change)="setSubcategory()">
+                <option *ngFor="let subCategory of subCategories" [ngValue]="subCategory.id"
+                  [selected]="subCategory.id == iSubcategory">
+                  {{ subCategory.name }}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <button class="btn btn-secondary btn-fw" *ngIf="'new' !== productId">Guardar</button>
+          <button class="btn btn-secondary btn-fw" *ngIf="'new' === productId">Crear</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<swal #errorSwal title="Producto" text=""></swal>
