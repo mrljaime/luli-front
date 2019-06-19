@@ -11,8 +11,25 @@ import { Router } from '@angular/router';
 })
 export class ProductsComponent implements OnInit {
   
+  public tableColumns = [
+    { prop: 'id', name: 'Id' },
+    { prop: 'name', name: 'Nombre' },
+    { prop: 'description', name: 'Descripción' }
+  ];
+  
+  /**
+   * @type ProductInterface[]
+   */
   private products: ProductInterface[] = [];
+  
+  /**
+   * @type ProductsService
+   */
   private productsService: ProductsService;
+  
+  /**
+   * @type Router
+   */
   private router: Router;
 
   constructor(productsService: ProductsService, router: Router) {

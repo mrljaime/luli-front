@@ -37,6 +37,7 @@ import { CategoriesService } from './services/categories.service';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { ProvidersComponent } from './providers/providers.component';
 import { ProvidersEditComponent } from './providers-edit/providers-edit.component';
+import { OrdersComponent } from './orders/orders.component';
 
 
 @NgModule({
@@ -65,7 +66,8 @@ import { ProvidersEditComponent } from './providers-edit/providers-edit.componen
     LoginComponent,
     ProductsEditComponent,
     ProvidersComponent,
-    ProvidersEditComponent
+    ProvidersEditComponent,
+    OrdersComponent
   ],
   imports: [
     HttpClientModule,

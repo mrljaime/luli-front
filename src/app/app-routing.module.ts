@@ -22,6 +22,7 @@ import { LoginComponent } from './login/login.component';
 import {ProductsEditComponent} from './products-edit/products-edit.component';
 import {ProvidersComponent} from './providers/providers.component';
 import {ProvidersEditComponent} from './providers-edit/providers-edit.component';
+import {OrdersComponent} from './orders/orders.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -45,7 +46,8 @@ const routes: Routes = [
   { path: 'products/:id', component: ProductsEditComponent },
   { path: 'login', component: LoginComponent },
   { path: 'providers', component: ProvidersComponent },
-  { path: 'providers/:id', component: ProvidersEditComponent }
+  { path: 'providers/:id', component: ProvidersEditComponent },
+  { path: 'orders', component: OrdersComponent }
 ];
 
 @NgModule({
