@@ -1,0 +1,18 @@
+<div class="col-lg-12 grid-margin stretch-card">
+  <div class="card">
+    <div class="card-body">
+      <button class="btn" style="display: inline-block;" *ngFor="let sessionOrder of sessionOrders" (click)="go(sessionOrder.id)">
+        Orden {{ sessionOrder.id }}
+      </button>
+    </div>
+  </div>
+</div>
+<div class="col-lg-12 grid-margin stretch-card">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">Creación de orden</h4>
+      <router-outlet (activate)="onActivate($event)"></router-outlet>
+    </div>
+  </div>
+</div>
+<swal #errorSwal title="Producto" text=""></swal>

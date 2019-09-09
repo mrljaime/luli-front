@@ -1,0 +1,73 @@
+<section class="row">
+  <button class="btn" (click)="addEmptyOrder()" [hidden]="orderId !== 'new'">Agregar orden</button>
+  <table style="width: 100%;" class="table" [hidden]="orderId === 'new'">
+    <thead>
+    <th style="width: 5%;"></th>
+    <th style="width: 55%;">Producto</th>
+    <th style="width: 20%;">Cantidad</th>
+    <th style="width: 20%;">Importe</th>
+    <th style="width: 20%;">Subtotal</th>
+    </thead>
+    <tbody>
+    <tr *ngFor="let element of orderElements">
+      <td>
+        <span class="fa fa-times"></span>
+      </td>
+      <td>{{ element.name }}</td>
+      <td>{{ element.qty }}</td>
+      <td>{{ element.price|currency }}</td>
+      <td>{{ element.amount|currency }}</td>
+    </tr>
+    <tr style="margin-top: 2.5px; margin-bottom: 2.5px;" [hidden]="order.paid">
+      <td colspan="4">&nbsp;</td>
+      <td>
+        <span class="fa fa-plus" style="cursor: pointer;" (click)="open(content)"></span>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <span style="float: right;" [hidden]="order.elements === 0 && orderId === 'new'">Total: {{ order.total|currency }}</span>
+</section>
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Productos</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <table style="width: 100%" class="table table-bordered">
+        <thead>
+        <tr>
+          <th style="width: 40%;">Producto/Cantidad</th>
+          <th style="width: 40%;">Precio</th>
+          <th style="width: 10%">Cantidad</th>
+          <th style="width: 10%;">Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let product of products">
+          <td>
+            {{ product.name }} ({{ product.qty }})
+          </td>
+          <td>
+            {{ product.price|currency }}
+          </td>
+          <td>
+            <input type="number" [(ngModel)]="product.qtyRequest" [ngModelOptions]="{standalone: true}"
+                   [max]="product.qty">
+          </td>
+          <td>
+            <button class="btn" (click)="addOrderElement(product)"
+                    [disabled]="product.qty === 0 && product.qtyRequest === 0">
+              Agregar
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</ng-template>
+<swal #errorSwal title="Producto" text=""></swal>

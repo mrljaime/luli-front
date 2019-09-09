@@ -38,6 +38,8 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { ProvidersComponent } from './providers/providers.component';
 import { ProvidersEditComponent } from './providers-edit/providers-edit.component';
 import { OrdersComponent } from './orders/orders.component';
+import { OrdersEditComponent } from './orders-edit/orders-edit.component';
+import { OrdersManagementComponent } from './orders-management/orders-management.component';
 
 
 @NgModule({
@@ -67,7 +69,9 @@ import { OrdersComponent } from './orders/orders.component';
     ProductsEditComponent,
     ProvidersComponent,
     ProvidersEditComponent,
-    OrdersComponent
+    OrdersComponent,
+    OrdersEditComponent,
+    OrdersManagementComponent
   ],
   imports: [
     HttpClientModule,
