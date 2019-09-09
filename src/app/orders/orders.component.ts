@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {OrdersService} from '../services/orders.service';
 import {OrderInterface} from '../interfaces/order-interface';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-orders',
@@ -8,6 +9,8 @@ import {OrderInterface} from '../interfaces/order-interface';
   styleUrls: ['./orders.component.scss']
 })
 export class OrdersComponent implements OnInit {
+  
+  private router: Router;
   
   /**
    * @type OrdersService
@@ -19,7 +22,8 @@ export class OrdersComponent implements OnInit {
    */
   private orders: OrderInterface[] = [];
   
-  constructor(ordersService: OrdersService) {
+  constructor(router: Router, ordersService: OrdersService) {
+    this.router = router;
     this.ordersService = ordersService;
   }
 
@@ -40,4 +44,8 @@ export class OrdersComponent implements OnInit {
     );
   }
 
+  newOrder() {
+    this.router.navigateByUrl('/orders/modify/new');
+  }
+  
 }

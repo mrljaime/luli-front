@@ -6,7 +6,7 @@
           <h4 class="card-title">Órdenes</h4>
         </div>
         <div class="col-md-6">
-          <button type="button" class="btn btn-link btn-fw" style="float: right;">Crear</button>
+          <button type="button" class="btn btn-link btn-fw" style="float: right;" (click)="newOrder()">Crear</button>
         </div>
       </div>
       <p class="card-description">
@@ -21,6 +21,7 @@
           <th>Total</th>
           <th>Enviado</th>
           <th>Pagado</th>
+          <th>Acciones</th>
           </thead>
           <tbody>
           <tr *ngFor="let order of orders">
@@ -37,6 +38,11 @@
               <span style="font-size: 1.2em;">
                 <i class="fa fa-check-circle" [ngClass]="{'true': order.paid, 'false': !order.paid}"></i>
               </span>
+            </td>
+            <td>
+              <a routerLink="/orders/modify/{{ order.id }}">
+                <i class="fa fa-edit"></i>
+              </a>
             </td>
           </tr>
           </tbody>
