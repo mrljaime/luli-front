@@ -8,6 +8,7 @@ export interface ProductInterface {
   description?: string;
   price?: number;
   qty?: number;
+  qtyRequest?: number;
   category?: CategoryInterface;
   subCategory?: SubCategoryInterface;
   provider?: ProviderInterface;
