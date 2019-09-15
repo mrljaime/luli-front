@@ -24,7 +24,9 @@ export class OrdersEditComponent implements OnInit {
     paid: false,
     sent: false,
     createdAt: null,
-    elements: 0
+    elements: 0,
+    closed: false,
+    interest: 0.00
   };
   
   /**
@@ -78,6 +80,16 @@ export class OrdersEditComponent implements OnInit {
   @Output() orderAdded: EventEmitter<any> = new EventEmitter();
   
   /**
+   * @var totalElements
+   */
+  private totalElements = 0.00;
+  
+  /**
+   * @var totalInterest
+   */
+  private totalInterest = 0.00;
+  
+  /**
    * Constructor
    * @param route
    * @param router
@@ -126,7 +138,6 @@ export class OrdersEditComponent implements OnInit {
       }
       
       this.order = data.data;
-      console.log('Orden: ', this.order);
     });
     this.orderService.getProducts(id).subscribe(data => {
       if (typeof data.error !== 'undefined') {
@@ -137,7 +148,10 @@ export class OrdersEditComponent implements OnInit {
       }
       
       this.orderElements = data.data;
-      console.log('Productos: ', this.orderElements);
+      this.orderElements.forEach(orderElement => {
+        this.totalElements += orderElement.qty * orderElement.price;
+        this.totalInterest += orderElement.interest;
+      });
     });
   }
   
@@ -177,6 +191,22 @@ export class OrdersEditComponent implements OnInit {
     this.orderService.addElement(this.order.id, params).subscribe(data => {
       if (typeof data.error !== 'undefined') {
         console.error(data.error);
+        this.showSwal('error', data.error);
+        
+        return;
+      }
+      
+      this.getOrder(this.orderId);
+      this.getProducts();
+    });
+  }
+  
+  /**
+   * Use to add closed status to order
+   */
+  private close() {
+    this.orderService.addStatus(this.order.id, 16).subscribe(data => {
+      if (typeof data.error !== 'undefined') {
         this.showSwal('error', data.error);
         
         return;

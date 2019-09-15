@@ -3,30 +3,65 @@
   <table style="width: 100%;" class="table" [hidden]="orderId === 'new'">
     <thead>
     <th style="width: 5%;"></th>
-    <th style="width: 55%;">Producto</th>
+    <th style="width: 45%;">Producto</th>
     <th style="width: 20%;">Cantidad</th>
     <th style="width: 20%;">Importe</th>
+    <th style="width: 10%;">Comisión</th>
     <th style="width: 20%;">Subtotal</th>
     </thead>
     <tbody>
     <tr *ngFor="let element of orderElements">
       <td>
-        <span class="fa fa-times"></span>
+        <span class="fa fa-times" style="cursor: pointer;" [hidden]="order.closed || order.paid"></span>
       </td>
       <td>{{ element.name }}</td>
       <td>{{ element.qty }}</td>
       <td>{{ element.price|currency }}</td>
+      <td>{{ element.interest|currency }}</td>
       <td>{{ element.amount|currency }}</td>
     </tr>
+    <tr></tr>
+    <tr [hidden]="order.elements === 0 || orderId === 'new'">
+      <td colspan="3">&nbsp;</td>
+      <td>{{ totalElements|currency }}</td>
+      <td>{{ totalInterest|currency }}</td>
+      <td>&nbsp;</td>
+    </tr>
     <tr style="margin-top: 2.5px; margin-bottom: 2.5px;" [hidden]="order.paid">
-      <td colspan="4">&nbsp;</td>
+      <td colspan="5">&nbsp;</td>
       <td>
-        <span class="fa fa-plus" style="cursor: pointer;" (click)="open(content)"></span>
+        <span class="fa fa-plus" style="cursor: pointer;" (click)="open(content)"
+        [hidden]="order.closed ||order.paid"></span>
       </td>
     </tr>
     </tbody>
   </table>
-  <span style="float: right;" [hidden]="order.elements === 0 && orderId === 'new'">Total: {{ order.total|currency }}</span>
+</section>
+<section class="margin-top-35">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" [hidden]="order.elements === 0 || orderId === 'new'">
+    <span class="right-only">
+      Total: {{ order.total|currency }}
+    </span>
+  </div>
+</section>
+<section class="row margin-top-35" [hidden]="orderId === 'new'">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 bottom-line">
+    <span>Acciones</span>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <button style="display: inline-block;" class="btn btn-secondary margin-3" [swal]="{
+        title: 'Cerrar órden',
+        text: '¿Estás seguro de cerrar la órden de compra?'
+      }"
+        (confirm)="close()"
+        [disabled]="order.closed || order.elements === 0">Cerrar orden</button>
+      <button style="display: inline-block;" class="btn btn-secondary margin-3" [disabled]="!order.closed">
+        Generar movimiento
+      </button>
+      <button style="display: inline-block;" class="btn btn-secondary margin-3" [disabled]="order.paid">Orden pagada</button>
+    </div>
+  </div>
 </section>
 <ng-template #content let-modal>
   <div class="modal-header">
@@ -56,7 +91,7 @@
           </td>
           <td>
             <input type="number" [(ngModel)]="product.qtyRequest" [ngModelOptions]="{standalone: true}"
-                   [max]="product.qty">
+                   [max]="product.qty" class="form-control" min="0">
           </td>
           <td>
             <button class="btn" (click)="addOrderElement(product)"
