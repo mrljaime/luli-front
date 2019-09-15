@@ -56,4 +56,14 @@ export class OrdersService {
   public addElement(order: number, formData: any) {
     return this.apiGateway.doPost('/orders/' + order + '/addElements', formData);
   }
+  
+  /**
+   * Use to add some statuses to orders
+   *
+   * @param order
+   * @param status
+   */
+  public addStatus(order: number, status: number) {
+    return this.apiGateway.doPost('/orders/' + order + '/status', { status: status });
+  }
 }
