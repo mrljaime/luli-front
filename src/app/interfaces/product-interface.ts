@@ -7,6 +7,7 @@ export interface ProductInterface {
   name?: string;
   description?: string;
   price?: number;
+  interest?: number;
   qty?: number;
   qtyRequest?: number;
   category?: CategoryInterface;

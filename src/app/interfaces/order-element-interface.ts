@@ -4,4 +4,5 @@ export interface OrderElementInterface {
   qty: number;
   price: number;
   amount: number;
+  interest: number;
 }
