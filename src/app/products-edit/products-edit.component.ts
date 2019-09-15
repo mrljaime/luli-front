@@ -164,6 +164,7 @@ export class ProductsEditComponent implements OnInit {
       category: this.product.category.id,
       subCategory: this.product.subCategory.id,
       active: this.product.active,
+      interest: this.product.interest
     };
     
     this.productsService.updateProduct(this.product.id, params).subscribe(

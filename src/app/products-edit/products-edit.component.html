@@ -62,7 +62,7 @@
           </div>
           <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
             <div class="form-group">
-              <label for="subCategory">Categoría</label>
+              <label for="subCategory">Sub Categoría</label>
               <select name="subCategory" id="subCategory" class="form-control" [(ngModel)]="iSubcategory"
                 [ngModelOptions]="{standalone: true}" (change)="setSubcategory()">
                 <option *ngFor="let subCategory of subCategories" [ngValue]="subCategory.id"
@@ -70,6 +70,15 @@
                   {{ subCategory.name }}
                 </option>
               </select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="form-group">
+              <label for="interest">Interés</label>
+              <input type="number" name="interest" id="interest" class="form-control" [(ngModel)]="product.interest" min="0"
+                [ngModelOptions]="{standalone: true}">
             </div>
           </div>
         </div>
