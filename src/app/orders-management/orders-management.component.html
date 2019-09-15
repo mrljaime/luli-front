@@ -1,9 +1,12 @@
 <div class="col-lg-12 grid-margin stretch-card">
   <div class="card">
     <div class="card-body">
-      <button class="btn" style="display: inline-block;" *ngFor="let sessionOrder of sessionOrders" (click)="go(sessionOrder.id)">
-        Orden {{ sessionOrder.id }}
-      </button>
+      <p>Tus últimas órdenes</p>
+      <p style="margin-left: 20px" [hidden]="sessionOrders.length > 0">No tienes órdenes recientes</p>
+      <span class="btn inline-badges" style="display: inline-block;" *ngFor="let sessionOrder of sessionOrders">
+        <span (click)="go(sessionOrder.id)" style="cursor: pointer;">Orden {{ sessionOrder.id }}</span>&nbsp;
+        <span class="fa fa-times" (click)="removeFromSession(sessionOrder.id)" style="cursor: pointer;"></span>
+      </span>
     </div>
   </div>
 </div>

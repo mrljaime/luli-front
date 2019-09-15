@@ -52,6 +52,10 @@ export class OrdersManagementComponent implements OnInit {
     }
   }
   
+  /**
+   * Use to add order to session
+   * @param data
+   */
   private addToLocalSessions(data: any) {
     let sessionOrders = [];
     if (null != localStorage.getItem('sessionOrders')) {
@@ -62,6 +66,21 @@ export class OrdersManagementComponent implements OnInit {
       sessionOrders.shift();
     }
     sessionOrders.push(data);
+    this.sessionOrders = sessionOrders;
+    localStorage.setItem('sessionOrders', JSON.stringify(this.sessionOrders));
+  }
+  
+  private removeFromSession(id: number) {
+    let sessionOrders = [];
+    if (null != localStorage.getItem('sessionOrders')) {
+      sessionOrders = JSON.parse(localStorage.getItem('sessionOrders'));
+    }
+    console.log(sessionOrders);
+    sessionOrders = sessionOrders.filter(value => {
+      console.log(value.id !== id);
+      return (value.id !== id);
+    });
+    console.log(sessionOrders);
     this.sessionOrders = sessionOrders;
     localStorage.setItem('sessionOrders', JSON.stringify(this.sessionOrders));
   }
